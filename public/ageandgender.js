@@ -27,6 +27,7 @@ async function start() {
     container.append(image)
     canvas = faceapi.createCanvasFromMedia(image)
     container.append(canvas)
+    document.getElementById('load').innerHTML='Predicting...'
     const displaySize = { width: image.width, height: image.height }
     faceapi.matchDimensions(canvas, displaySize)
     const detections = await faceapi.detectAllFaces(image, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptors().withAgeAndGender()
@@ -43,6 +44,7 @@ async function start() {
           result.detection.box.bottomLeft
         ).draw(canvas)
       })
+      document.getElementById('load').innerHTML=''
     
     
   })

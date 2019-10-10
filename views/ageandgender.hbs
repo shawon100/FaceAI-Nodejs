@@ -204,14 +204,19 @@
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
+
+    function load()
+    {
+         document.getElementById('load').innerHTML='Loading Image...';
+    }
     </script>
 
    <br><br>
    <center>
    <div id="uploads">
  
-      <input type="file" id="imageUpload" class="btn btn-success" accept=".jpg, .jpeg, .JPG">
-   
+      <input type="file" id="imageUpload" oninput="load()" class="btn btn-success" accept=".jpg, .jpeg, .JPG">
+      <br><div id='load'></div>
    </div>
   </center>
   

@@ -18,8 +18,9 @@ async function start() {
   
   let image
   let canvas
-  //document.getElementById('uploads').append('Loaded')
+
   imageUpload.addEventListener('change', async () => {
+    
     if (image) image.remove()
     if (canvas) canvas.remove()
     image = await faceapi.bufferToImage(imageUpload.files[0])
@@ -28,6 +29,7 @@ async function start() {
     container.append(image)
     canvas = faceapi.createCanvasFromMedia(image)
     container.append(canvas)
+    document.getElementById('load').innerHTML='Predecting...'
     const displaySize = { width: image.width, height: image.height }
     faceapi.matchDimensions(canvas, displaySize)
     const detections = await faceapi.detectAllFaces(image, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
@@ -35,6 +37,7 @@ async function start() {
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     faceapi.draw.drawDetections(canvas, resizedDetections)
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
+    document.getElementById('load').innerHTML=''
     
     
   })
